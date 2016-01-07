@@ -1,8 +1,9 @@
 /**
  * Author: Ben Olson
  * Date: 1/06/16
- * Time: 4:30 PM.
+ * Time: 10:30 PM.
  * Course: LaunchCode Java Master Class 
+ * Assignment: Pset 1
  */
 
 
