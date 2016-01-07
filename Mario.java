@@ -1,7 +1,8 @@
 /**
  * Author: Ben Olson
  * Date: 1/06/16
- * Time: 4:30 PM
+ * Time: 4:30 PM.
+ * Course: LaunchCode Java Master Class 
  */
 
 
@@ -11,14 +12,19 @@ public class Mario {
 
 	public static void main(String[] varArgs) {
 
-		getInput();
+		int height = getInput();
+		printPyramid(height);
 
 	}
 
-	static void getInput () {
+
+	
+	static int getInput () {
 
 		Console c = System.console();
 		String stringHeight = c.readLine("Enter pyramid height:");
+		int height = 0;
+		
 		try {
 			height = Integer.parseInt(stringHeight);
 		} catch (Exception e) {
@@ -27,10 +33,28 @@ public class Mario {
 			System.exit(1);	
 		}
 
+		return height;
+
 
 	}
 
-	static int height = 0;
+	static void printPyramid (int pyramidHeight) {
+		
+		for (int spaces = pyramidHeight - 1, hashes = 2; spaces >= 0;
+			  spaces--, hashes++) {
+			 		 
+			for (int i = 0; i < spaces; i++) {
+				System.out.print(" ");	
+			}
 
+			for (int j = 0; j < hashes; j++) {
+				System.out.print("#");	
+			}	
+
+			System.out.println();
+
+		}
+
+	}
 
 }
