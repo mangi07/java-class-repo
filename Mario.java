@@ -41,18 +41,26 @@ public class Mario {
 
 	static void printPyramid (int pyramidHeight) {
 		
+		StringBuilder spacesString = new StringBuilder();
+		StringBuilder hashesString = new StringBuilder();
+		
 		for (int spaces = pyramidHeight - 1, hashes = 2; spaces >= 0;
 			  spaces--, hashes++) {
 			 		 
 			for (int i = 0; i < spaces; i++) {
-				System.out.print(" ");	
+				spacesString.append(" ");	
 			}
 
 			for (int j = 0; j < hashes; j++) {
-				System.out.print("#");	
+				hashesString.append("#");	
 			}	
 
-			System.out.println();
+			System.out.print(spacesString.toString());
+			System.out.printf("%s%n", hashesString.toString());
+
+			spacesString.delete(0, spacesString.length());
+			hashesString.delete(0, hashesString.length());
+			
 
 		}
 
