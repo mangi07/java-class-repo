@@ -19,18 +19,18 @@ public class Mario {
 	}
 
 
-	
+
 	static int getInput () {
 
 		Console c = System.console();
 		String stringHeight = c.readLine("Enter pyramid height:");
 		int height = 0;
-		
+
 		try {
 			height = Integer.parseInt(stringHeight);
 		} catch (Exception e) {
 			System.out.println("Could not parse height due to error: "
-				+ e);
+					+ e);
 			System.exit(1);	
 		}
 
@@ -40,13 +40,13 @@ public class Mario {
 	}
 
 	static void printPyramid (int pyramidHeight) {
-		
+
 		StringBuilder spacesString = new StringBuilder();
 		StringBuilder hashesString = new StringBuilder();
-		
+
 		for (int spaces = pyramidHeight - 1, hashes = 2; spaces >= 0;
-			  spaces--, hashes++) {
-			 		 
+				spaces--, hashes++) {
+
 			for (int i = 0; i < spaces; i++) {
 				spacesString.append(" ");	
 			}
@@ -60,7 +60,7 @@ public class Mario {
 
 			spacesString.delete(0, spacesString.length());
 			hashesString.delete(0, hashesString.length());
-			
+
 
 		}
 
