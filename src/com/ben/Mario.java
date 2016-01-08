@@ -7,6 +7,8 @@
  */
 
 
+package com.ben;
+
 import java.io.Console;
 
 public class Mario {
