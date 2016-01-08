@@ -18,6 +18,7 @@ public class Mario {
 		int height = getInput();
 		printPyramid(height);
 
+
 	}
 
 
