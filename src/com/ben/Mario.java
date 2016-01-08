@@ -9,15 +9,15 @@
 
 package com.ben;
 
-import java.io.Console;
+import java.util.Scanner;
 
 public class Mario {
 
 	public static void main(String[] varArgs) {
 
 		int height = getInput();
-		printPyramid(height);
-
+		String pyramid = makePyramid(height);
+		printPyramid(pyramid);
 
 	}
 
@@ -25,47 +25,47 @@ public class Mario {
 
 	static int getInput () {
 
-		Console c = System.console();
-		String stringHeight = c.readLine("Enter pyramid height:");
+		Scanner inputNumber = new Scanner(System.in);
 		int height = 0;
-
 		try {
-			height = Integer.parseInt(stringHeight);
+			height = inputNumber.nextInt();
 		} catch (Exception e) {
-			System.out.println("Could not parse height due to error: "
-					+ e);
-			System.exit(1);	
+			//e.printStackTrace();
+			System.out.println("Invalid input for height.");
+			System.exit(1);
 		}
 
 		return height;
 
-
 	}
 
-	static void printPyramid (int pyramidHeight) {
+	static String makePyramid (int pyramidHeight) {
 
-		StringBuilder spacesString = new StringBuilder();
-		StringBuilder hashesString = new StringBuilder();
+		StringBuilder pyramid = new StringBuilder();
 
 		for (int spaces = pyramidHeight - 1, hashes = 2; spaces >= 0;
 				spaces--, hashes++) {
 
 			for (int i = 0; i < spaces; i++) {
-				spacesString.append(" ");	
+				pyramid.append(" ");
 			}
 
 			for (int j = 0; j < hashes; j++) {
-				hashesString.append("#");	
+				pyramid.append("#");
 			}	
 
-			System.out.print(spacesString.toString());
-			System.out.printf("%s%n", hashesString.toString());
-
-			spacesString.delete(0, spacesString.length());
-			hashesString.delete(0, hashesString.length());
-
+			pyramid.append(System.getProperty("line.separator"));
 
 		}
+
+
+		return pyramid.toString();
+
+	}
+
+	static void printPyramid(String pyramid) {
+
+		System.out.println(pyramid);
 
 	}
 
