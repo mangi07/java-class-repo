@@ -9,6 +9,9 @@
 
 package com.ben;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.File;
 import java.util.Scanner;
 
 public class Mario {
@@ -17,7 +20,7 @@ public class Mario {
 
 		int height = getInput();
 		String pyramid = makePyramid(height);
-		printPyramid(pyramid);
+		printPyramid(pyramid, isPrintFile());
 
 	}
 
@@ -27,11 +30,14 @@ public class Mario {
 
 		Scanner inputNumber = new Scanner(System.in);
 		int height = 0;
+
+		System.out.println("Please enter pyramid height:");
+
 		try {
 			height = inputNumber.nextInt();
 		} catch (Exception e) {
 			//e.printStackTrace();
-			System.out.println("Invalid input for height.");
+			System.out.println("Invalid input for height: " + e.getMessage());
 			System.exit(1);
 		}
 
@@ -63,10 +69,43 @@ public class Mario {
 
 	}
 
-	static void printPyramid(String pyramid) {
+	static boolean isPrintFile() {
+		Scanner in = new Scanner(System.in);
 
-		System.out.println(pyramid);
+		while (true) {
+			System.out.printf("Please enter 1 or 2:%n" +
+					"1. Print pyramid to file.%n" +
+					"2. Print pyramid to console output.%n");
 
+			String number = in.next();
+
+			if (number.equals("1"))
+				return true;
+			else if (number.equals("2")) {
+				return false;
+			}
+
+			System.out.println("Invalid input...");
+
+		}
+	}
+
+	static void printPyramid (String pyramid, boolean toFile) {
+
+		if (toFile) {
+			File file = new File("mario.txt");
+			PrintWriter output = null;
+			try {
+				output = new PrintWriter(file);
+			} catch (FileNotFoundException e) {
+				System.out.println("Could not find this file:" + e.getMessage());
+			} finally {
+				output.print(pyramid);
+				output.close();
+			}
+		} else {
+			System.out.println(pyramid);
+		}
 	}
 
 }
