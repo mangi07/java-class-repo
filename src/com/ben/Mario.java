@@ -67,6 +67,7 @@ public class Mario {
 
 	}
 
+	// rename this method to getOutputStrategy
 	static boolean isPrintFile() {
 		Scanner in = new Scanner(System.in);
 
@@ -75,8 +76,14 @@ public class Mario {
 					"1. Print pyramid to file.%n" +
 					"2. Print pyramid to console output.%n");
 
+			// use Scanner regular expressions to filter input
+			//   and then catch exceptions
 			String number = in.next();
 
+			// refactor the following with the strategy design pattern
+			//   using 1 abstract class: Pyramid extends OutputStrategy
+			//   with one method Pyramid.print()
+			//   where ConsolePyramid and FilePyramid extend Pyramid
 			if (number.equals("1"))
 				return true;
 			else if (number.equals("2")) {
