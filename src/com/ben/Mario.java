@@ -9,9 +9,7 @@
 
 package com.ben;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.File;
+import java.io.*;
 import java.util.Scanner;
 
 public class Mario {
@@ -94,14 +92,12 @@ public class Mario {
 
 		if (toFile) {
 			File file = new File("mario.txt");
-			PrintWriter output = null;
-			try {
-				output = new PrintWriter(file);
-			} catch (FileNotFoundException e) {
+
+			try (BufferedWriter bw = new BufferedWriter(
+					new FileWriter(file.getAbsoluteFile()))) {
+				bw.write(pyramid);
+			} catch (IOException e) {
 				System.out.println("Could not find this file:" + e.getMessage());
-			} finally {
-				output.print(pyramid);
-				output.close();
 			}
 		} else {
 			System.out.println(pyramid);
