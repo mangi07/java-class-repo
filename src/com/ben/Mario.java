@@ -1,113 +1,85 @@
+package com.ben;
+
+import com.ben.printStrategies.ConsoleOutput;
+import com.ben.printStrategies.FileOutput;
+
+import java.util.Scanner;
+
 /**
  * Author: Ben Olson
  * Date: 1/06/16
- * Time: 10:30 PM.
- * Course: LaunchCode Java Master Class 
- * Assignment: Pset 1
+ * Time: 2:30 PM.
+ * Course: LaunchCode Java Master Class
+ * Assignment: Pset 2
  */
-
-
-package com.ben;
-
-import java.io.*;
-import java.util.Scanner;
-
 public class Mario {
 
 	public static void main(String[] varArgs) {
 
-		int height = getInput();
-		String pyramid = makePyramid(height);
-		printPyramid(pyramid, isPrintFile());
+		int height = getInteger("Please enter pyramid's height:");
+		PrintStrategy strategy = getPrintStrategy();
+
+		Pyramid pyramid = new Pyramid(height, strategy);
+		pyramid.print();
 
 	}
 
 
 
-	static int getInput () {
+	static int getInteger (String userPrompt) {
 
-		Scanner inputNumber = new Scanner(System.in);
-		int height = 0;
+		Scanner input = new Scanner(System.in);
+		int number;
 
-		System.out.println("Please enter pyramid height:");
-
-		try {
-			height = inputNumber.nextInt();
-		} catch (Exception e) {
-			//e.printStackTrace();
-			System.out.println("Invalid input for height: " + e.getMessage());
-			System.exit(1);
-		}
-
-		return height;
-
-	}
-
-	static String makePyramid (int pyramidHeight) {
-
-		StringBuilder pyramid = new StringBuilder();
-
-		for (int spaces = pyramidHeight - 1, hashes = 2; spaces >= 0;
-				spaces--, hashes++) {
-
-			for (int i = 0; i < spaces; i++) {
-				pyramid.append(" ");
+		String retry;
+		while (true) {
+			try {
+				System.out.println(userPrompt);
+				number = input.nextInt();
+				if (number < 1) {
+					throw new Exception("The number must be greater than 0.");
+				}
+				System.out.printf("Input taken: %d%n", number);
+				break;
+			} catch (Exception e) {
+				input.nextLine();
+				System.out.printf("Invalid input: " + e.getMessage()
+					+ "%n%nWould you like to try again (y/n)?  ");
+				retry = input.nextLine();
+				if (retry.equals("n")) {
+					System.exit(1);
+				}
 			}
-
-			for (int j = 0; j < hashes; j++) {
-				pyramid.append("#");
-			}	
-
-			pyramid.append(System.getProperty("line.separator"));
-
 		}
 
-
-		return pyramid.toString();
+		return number;
 
 	}
 
-	// rename this method to getOutputStrategy
-	static boolean isPrintFile() {
+	static PrintStrategy getPrintStrategy() {
 		Scanner in = new Scanner(System.in);
+		String inputString;
 
 		while (true) {
 			System.out.printf("Please enter 1 or 2:%n" +
 					"1. Print pyramid to file.%n" +
 					"2. Print pyramid to console output.%n");
 
-			// use Scanner regular expressions to filter input
-			//   and then catch exceptions
-			String number = in.next();
+			inputString = in.nextLine();
 
-			// refactor the following with the strategy design pattern
-			//   using 1 abstract class: Pyramid extends OutputStrategy
-			//   with one method Pyramid.print()
-			//   where ConsolePyramid and FilePyramid extend Pyramid
-			if (number.equals("1"))
-				return true;
-			else if (number.equals("2")) {
-				return false;
+			if (inputString.equals("1")) {
+				return new FileOutput();
+			}
+			else if (inputString.equals("2")) {
+				return new ConsoleOutput();
 			}
 
-			System.out.println("Invalid input...");
-
-		}
-	}
-
-	static void printPyramid (String pyramid, boolean toFile) {
-
-		if (toFile) {
-			File file = new File("mario.txt");
-
-			try (BufferedWriter bw = new BufferedWriter(
-					new FileWriter(file.getAbsoluteFile()))) {
-				bw.write(pyramid);
-			} catch (IOException e) {
-				System.out.println("Could not find this file:" + e.getMessage());
+			System.out.printf("Invalid input: " + inputString
+					+ "%n%nWould you like to try again (y/n)?  ");
+			inputString = in.nextLine();
+			if (inputString.equals("n")) {
+				System.exit(1);
 			}
-		} else {
-			System.out.println(pyramid);
 		}
 	}
 
