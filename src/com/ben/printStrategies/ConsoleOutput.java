@@ -1,6 +1,7 @@
 package com.ben.printStrategies;
 
-import com.ben.PrintStrategy;
+import com.ben.Printer;
+import com.ben.Pyramid;
 
 /**
  * Author: Ben Olson
@@ -9,9 +10,10 @@ import com.ben.PrintStrategy;
  * Course: LaunchCode Java Master Class
  * Assignment: Pset 2
  */
-public class ConsoleOutput implements PrintStrategy {
+public class ConsoleOutput implements Printer {
 
-    public void print(String text) {
-        System.out.println(text);
+    public void print(Pyramid p) {
+
+        System.out.println(p.toString());
     }
 }

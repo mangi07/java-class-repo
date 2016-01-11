@@ -17,7 +17,7 @@ public class Mario {
 	public static void main(String[] varArgs) {
 
 		int height = getInteger("Please enter pyramid's height:");
-		PrintStrategy strategy = getPrintStrategy();
+		Printer strategy = getPrintStrategy();
 
 		Pyramid pyramid = new Pyramid(height, strategy);
 		pyramid.print();
@@ -56,7 +56,7 @@ public class Mario {
 
 	}
 
-	static PrintStrategy getPrintStrategy() {
+	static Printer getPrintStrategy() {
 		Scanner in = new Scanner(System.in);
 		String inputString;
 

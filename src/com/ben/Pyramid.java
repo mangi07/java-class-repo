@@ -10,7 +10,7 @@ package com.ben;
 public class Pyramid {
 
     private int height;
-    PrintStrategy strategy;
+    Printer strategy;
     private String pyramidText;
 
     Pyramid (int height) {
@@ -18,18 +18,22 @@ public class Pyramid {
         buildPyramid();
     }
 
-    Pyramid (int height, PrintStrategy strategy) {
+    Pyramid (int height, Printer strategy) {
         this.height = height;
         this.strategy = strategy;
         buildPyramid();
     }
 
-    public void setPrintStrategy (PrintStrategy strategy) {
+    public void setPrintStrategy (Printer strategy) {
         this.strategy = strategy;
     }
     
     public void print () {
-        strategy.print(pyramidText);
+        strategy.print(this);
+    }
+
+    public String toString () {
+        return this.pyramidText;
     }
 
     private void buildPyramid () {

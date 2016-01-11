@@ -7,6 +7,6 @@ package com.ben;
  * Course: LaunchCode Java Master Class
  * Assignment: Pset 2
  */
-public interface PrintStrategy {
-    void print(String text);
+public interface Printer {
+    void print(Pyramid p);
 }
