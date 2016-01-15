@@ -17,7 +17,7 @@ public class Mario {
 	public static void main(String[] varArgs) {
 
 		Mario mario = new Mario(PyramidFactory.getInstance());
-		Pyramid pyramid = mario.createPyramid(PyramidFactory.getInstance());
+		Pyramid pyramid = mario.createPyramid();
 		pyramid.print();
 
 	}
@@ -28,7 +28,7 @@ public class Mario {
 		this.factory = factory;
 	}
 
-	public Pyramid createPyramid(PyramidFactory factory) {
+	public Pyramid createPyramid() {
 
 		int height = getInteger("Please enter pyramid's height:");
 		Printer strategy = getPrintStrategy();
