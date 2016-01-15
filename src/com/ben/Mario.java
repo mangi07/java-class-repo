@@ -16,17 +16,28 @@ public class Mario {
 
 	public static void main(String[] varArgs) {
 
-		int height = getInteger("Please enter pyramid's height:");
-		Printer strategy = getPrintStrategy();
-
-		Pyramid pyramid = PyramidFactory.getInstance().buildPyramid(height, strategy);
+		Mario mario = new Mario(PyramidFactory.getInstance());
+		Pyramid pyramid = mario.createPyramid(PyramidFactory.getInstance());
 		pyramid.print();
 
 	}
 
+	private PyramidFactory factory;
 
+	public Mario (PyramidFactory factory) {
+		this.factory = factory;
+	}
 
-	static int getInteger (String userPrompt) {
+	public Pyramid createPyramid(PyramidFactory factory) {
+
+		int height = getInteger("Please enter pyramid's height:");
+		Printer strategy = getPrintStrategy();
+		Pyramid pyramid = factory.buildPyramid(height, strategy);
+
+		return pyramid;
+	}
+
+	private int getInteger (String userPrompt) {
 
 		Scanner input = new Scanner(System.in);
 		int number;
@@ -56,7 +67,7 @@ public class Mario {
 
 	}
 
-	static Printer getPrintStrategy() {
+	private Printer getPrintStrategy() {
 		Scanner in = new Scanner(System.in);
 		String inputString;
 
