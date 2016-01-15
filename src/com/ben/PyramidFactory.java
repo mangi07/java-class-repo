@@ -9,6 +9,17 @@ package com.ben;
  */
 public class PyramidFactory {
 
+    private PyramidFactory () {}
+
+    private static PyramidFactory factory;
+
+    public static PyramidFactory getInstance() {
+        if (factory == null) {
+            factory = new PyramidFactory();
+        }
+        return factory;
+    }
+
     public static Pyramid buildPyramid (int height, Printer strategy) {
         return new Pyramid(height, strategy);
     }

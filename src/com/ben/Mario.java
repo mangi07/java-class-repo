@@ -19,7 +19,7 @@ public class Mario {
 		int height = getInteger("Please enter pyramid's height:");
 		Printer strategy = getPrintStrategy();
 
-		Pyramid pyramid = PyramidFactory.buildPyramid(height, strategy);
+		Pyramid pyramid = PyramidFactory.getInstance().buildPyramid(height, strategy);
 		pyramid.print();
 
 	}
