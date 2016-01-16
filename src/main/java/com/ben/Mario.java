@@ -2,6 +2,8 @@ package com.ben;
 
 import com.ben.printStrategies.ConsoleOutput;
 import com.ben.printStrategies.FileOutput;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Scanner;
 
@@ -16,8 +18,9 @@ public class Mario {
 
 	public static void main(String[] varArgs) {
 
-		Mario mario = new Mario(PyramidFactory.getInstance());
-		Pyramid pyramid = mario.createPyramid();
+		ApplicationContext context =
+				new ClassPathXmlApplicationContext("application.xml");
+		Pyramid pyramid = (Pyramid)context.getBean("pyramid");
 		pyramid.print();
 
 	}

@@ -10,8 +10,8 @@
     </bean>
 
     <bean id="pyramidFactory"
-        class="com.ben.PyramidFactory"
-        factory-method="getInstance" />
+          class="com.ben.PyramidFactory"
+          factory-method="getInstance" />
 
     <bean id="pyramid"
         factory-bean="mario"
